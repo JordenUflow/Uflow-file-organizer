@@ -1,17 +1,29 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<p>Do you want to generate a file structure?</p>
+
+<div class="settings">
+  <input type="checkbox" id="archive" checked />
+  <p>Create archive</p>
+</div>
+
+<button id="generate">Generate</button>
+
 <script>
+  const generate = document.getElementById('generate');
+  const archive = document.getElementById('archive');
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+  generate.addEventListener('click', 
+    function(){ 
+      parent.postMessage({ pluginMessage: archive.checked }, '*');
+    });
 
 </script>
+
+<style>
+  .settings {
+    display: flex;
+  }
+
+  .settings p {
+    margin-left: 5px;
+  }
+</style>
