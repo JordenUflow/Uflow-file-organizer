@@ -1,8 +1,17 @@
 <p>Do you want to generate a file structure?</p>
 
-<div class="settings">
-  <input type="checkbox" id="archive" checked />
-  <p>Create archive</p>
+<div>
+  <p>Advanced settings</p>
+  <div class="settings">
+    <div style="display: flex;">
+      <input type="checkbox" id="archive" checked />
+      <p>Create archive</p>
+    </div>
+    <div style="display: flex;">
+      <input type="checkbox" id="cover" checked />
+      <p>Create cover</p>
+    </div>
+  </div>
 </div>
 
 <button id="generate">Generate</button>
@@ -10,19 +19,30 @@
 <script>
   const generate = document.getElementById('generate');
   const archive = document.getElementById('archive');
+  const cover = document.getElementById('cover');
 
   generate.addEventListener('click', 
     function(){ 
-      parent.postMessage({ pluginMessage: archive.checked }, '*');
+      parent.postMessage({ pluginMessage: [archive.checked, cover.checked] }, '*');
     });
 </script>
 
 <style>
   .settings {
     display: flex;
+    flex-direction: column;
+  }
+
+  p {
+    margin: 0px;
   }
 
   .settings p {
+    margin: 0;
     margin-left: 5px;
+  }
+
+  #generate {
+    margin-bottom: 5rem;
   }
 </style>
