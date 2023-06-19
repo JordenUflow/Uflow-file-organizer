@@ -3,8 +3,12 @@
 <div>
   <p>Project settings</p>
   <div>
-    <p>project name:</p>
-    <input type="text" id="projectName" />
+    <p>Document title:</p>
+    <input type="text" id="docTitle"/>
+  </div>
+  <div>
+    <p>Project</p>
+    <input type="text" id="projectName"/>
   </div>
   <div>
     <p>UI-designer</p>
@@ -38,10 +42,26 @@
   const generate = document.getElementById('generate');
   const archive = document.getElementById('archive');
   const cover = document.getElementById('cover');
+  
+  //inputfields
+  const docTitle = document.getElementById('docTitle');
+  const UI = document.getElementById('uiDesigner');
+  const UX = document.getElementById('uxDesigner');
+  const desc = document.getElementById('Description');
+  const project = document.getElementById('projectName');
 
-  generate.addEventListener('click', 
-    function(){ 
-      parent.postMessage({ pluginMessage: [archive.checked, cover.checked] }, '*');
+  generate.addEventListener('click',   
+  function(){ 
+      parent.postMessage({ pluginMessage: [
+        archive.checked, 
+        cover.checked, 
+        docTitle.value, 
+        UI.value, 
+        UX.value, 
+        desc.value,
+        project.value
+      ] 
+      }, '*');
     });
 </script>
 
