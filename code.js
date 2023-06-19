@@ -28,9 +28,8 @@ figma.ui.onmessage = (data) => {
 };
 
 function createCover(coverkey) {
-
     importNode(coverkey);
-
+    
 
     //Check if Cover has been made already
     // if (figma.root.children[0].name === "Cover") {
