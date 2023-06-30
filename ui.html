@@ -1,38 +1,47 @@
-<p>Do you want to generate a file structure?</p>
+<div class="container">
+  <div>
+    <p class="title">Project settings</p>
+    <div class="input-container">
+      <div>
+        <p class="label">Document title:</p>
+        <input type="text" id="docTitle"/>
+      </div>
+      <div>
+        <p class="label">Project</p>
+        <input type="text" id="projectName"/>
+      </div>
+    </div>
+  </div>
+  
+  <div class="input-container">
+    <div>
+      <p class="label">UI-designer</p>
+      <input type="text" id="uiDesigner" />
+    </div>
+    <div>
+      <p class="label">UX-designer</p>
+      <input type="text" id="uxDesigner" />
+    </div>
+  </div>
+  <div class="input-container-desc">
+    <div>
+      <p class="label">Description</p>
+      <input type="text" id="Description" />
+    </div>
+  </div>
 
-<div>
-  <p>Project settings</p>
-  <div>
-    <p>Document title:</p>
-    <input type="text" id="docTitle"/>
-  </div>
-  <div>
-    <p>Project</p>
-    <input type="text" id="projectName"/>
-  </div>
-  <div>
-    <p>UI-designer</p>
-    <input type="text" id="uiDesigner" />
-  </div>
-  <div>
-    <p>UX-designer</p>
-    <input type="text" id="uxDesigner" />
-  </div>
-  <div>
-    <p>Description</p>
-    <input type="text" id="Description" />
-  </div>
-
-  <p>Advanced settings</p>
+  <div class="advanced">
+    <p class="title">Advanced settings</p>
   <div class="settings">
     <div style="display: flex;">
       <input type="checkbox" id="archive" checked />
-      <p>Create archive</p>
+      <p class="checkbox-label">Create archive</p>
     </div>
     <div style="display: flex;">
       <input type="checkbox" id="cover" checked />
-      <p>Create cover</p>
+      <p class="checkbox-label">Create cover</p>
     </div>
+  </div>
   </div>
 </div>
 
@@ -66,6 +75,58 @@
 </script>
 
 <style>
+  html {
+    background-color: #F8FBFF;
+    margin: 16px;
+    font-family: Arial, Helvetica, sans-serif
+  }
+
+  .input-container {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  .input-container div {
+    width: 100%;
+  }
+  
+  .input-container div input {
+    width: 100%;
+  }
+
+  .input-container div:first-of-type {
+    margin-right: 16px;
+  }
+
+  .input-container-desc {
+    width: 100%;
+  }
+
+  .input-container-desc div input {
+    width: 100%;
+    height: 48px;
+  }
+
+  .label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .checkbox-label {
+    font-size: 12px;
+    align-self: center;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .advanced {
+    margin-top: 20px;
+  }
+
   .settings {
     display: flex;
     flex-direction: column;
@@ -82,5 +143,6 @@
 
   #generate {
     margin-bottom: 5rem;
+    margin-top: 20px;
   }
 </style>

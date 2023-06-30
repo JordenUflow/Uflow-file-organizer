@@ -1,46 +1,59 @@
-
-figma.showUI(__html__, { width: 400, height: 400, title: "File orangizer" });
-
+figma.showUI(__html__, { width: 500, height: 400, title: "File orangizer" });
 figma.ui.onmessage = (data) => {
-  let archive = data[0];
-  let cover = data[1];
-  let coverTitle = "lorem ipsum";
+    let archiveChecked = data[0];
+    let coverChecked = data[1];
+    let coverTitle = data[2];
+    let UIdesigner = data[3];
+    let UXdesigner = data[4];
+    let desc = data[5];
+    let project = data[6];
+    let coverkey = '2c80a7c879f421331226276dfbb9c6b878a99061';
+    let projectKey = '6640a7fc89ec988a7214d13fb90641de03d69a1a'
 
-  if(cover === true){
-   createCover(coverTitle);
+    createCover(coverkey, coverTitle, project, coverChecked);
+    createInfo(projectKey, UIdesigner, UXdesigner, desc);
+    creatArchive(archiveChecked);
+};;
+
+async function createCover(coverkey, coverTitle, project, coverChecked) {
+  if(coverChecked === true){
+    let importComponent = await figma.importComponentByKeyAsync(coverkey);
+   let instance = importComponent.createInstance();
+   
+   instance.setProperties({         
+     'title#10694:0' : coverTitle,
+     'Project#10718:5': project
+    });
+
+    let frame = figma.createFrame();
+    frame.resize(1280,640);
+    frame.name = "cover";
+    frame.appendChild(instance);
+    figma.setFileThumbnailNodeAsync(frame)
+
+    figma.currentPage.name = 'Cover';
   }
 }
 
-function createCover(title: string){
-  //Check if Cover has been made already
-  if(figma.root.children[0].name === "Cover"){
-    //if cover exists -> notify user
-    figma.notify('Cover already created');
-  } else {
-      //if no cover exists, create new page and set name
-    let coverPage = figma.createPage();
-    figma.root.insertChild(0, coverPage);
-    figma.root.children[0].name = "Cover";
+async function createInfo(projectKey, UIdesigner, UXdesigner, desc) {
+     let importComponent = await figma.importComponentByKeyAsync(projectKey);
+     let instance = importComponent.createInstance();
 
-    //navigate to the newly made page
-    figma.currentPage = coverPage;
+      instance.setProperties({         
+        'Description#11237:0' : desc,
+        'UI-designer#11237:2': UIdesigner,
+        'UX-designer#11237:1': UXdesigner,
+        'Business#11237:3': '/',
+        'Feature-designer#11237:4': '/',
+        'Solution designer#11237:5': '/'
+       });
 
-    //create cover visual at cover page
-    // TO BE FINALISED!!
-    (async () => {
-      const text = figma.createText()
-    
-      // Move to (50, 50)
-      text.x = 0
-      text.y = 0
-    
-      // Load the font in the text node before setting the characters
-      await figma.loadFontAsync(text.fontName)
-      text.characters = title;
-    
-      // Set bigger font size and red color
-      text.fontSize = 18
-      text.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 0 } }]
-    })()
+       instance.x = 1380;
   }
-}
+
+  function creatArchive(archiveChecked){
+    if(archiveChecked === true){
+      let archivePage = figma.createPage();
+      archivePage.name = 'Archive';
+    }
+  }
