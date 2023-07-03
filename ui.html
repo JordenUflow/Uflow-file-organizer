@@ -30,6 +30,17 @@
     </div>
   </div>
 
+  <div class="input-container-release">
+    <p class="label">Release</p>
+    <input type="text" id="year" class="year" />
+    <select name="quarter" id="quarter">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+  </div>
+
   <div class="advanced">
     <p class="title">Advanced settings</p>
   <div class="settings">
@@ -41,6 +52,14 @@
       <input type="checkbox" id="cover" checked />
       <p class="checkbox-label">Create cover</p>
     </div>
+    <div style="display: flex;">
+      <input type="checkbox" id="release" checked />
+      <p class="checkbox-label">Create release</p>
+    </div>
+    <div style="display: flex;">
+      <input type="checkbox" id="tobe" checked />
+      <p class="checkbox-label">Create to-be</p>
+    </div>
   </div>
   </div>
 </div>
@@ -51,6 +70,8 @@
   const generate = document.getElementById('generate');
   const archive = document.getElementById('archive');
   const cover = document.getElementById('cover');
+  const release = document.getElementById('release');
+  const tobe = document.getElementById('tobe');
   
   //inputfields
   const docTitle = document.getElementById('docTitle');
@@ -58,6 +79,8 @@
   const UX = document.getElementById('uxDesigner');
   const desc = document.getElementById('Description');
   const project = document.getElementById('projectName');
+  const quarter = document.getElementById('quarter');
+  const year = document.getElementById('year');
 
   generate.addEventListener('click',   
   function(){ 
@@ -68,7 +91,11 @@
         UI.value, 
         UX.value, 
         desc.value,
-        project.value
+        project.value,
+        release.checked,
+        tobe.checked,
+        quarter.value,
+        year.value
       ] 
       }, '*');
     });
@@ -139,6 +166,15 @@
   .settings p {
     margin: 0;
     margin-left: 5px;
+  }
+
+  .year {
+    width: 50px;
+  }
+
+  .input-container-release {
+    margin-top: 16px;
+    display: block;
   }
 
   #generate {

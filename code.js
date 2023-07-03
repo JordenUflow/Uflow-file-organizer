@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-figma.showUI(__html__, { width: 500, height: 400, title: "File orangizer" });
+figma.showUI(__html__, { width: 500, height: 500, title: "File orangizer" });
 figma.ui.onmessage = (data) => {
     let archiveChecked = data[0];
     let coverChecked = data[1];
@@ -17,10 +17,16 @@ figma.ui.onmessage = (data) => {
     let UXdesigner = data[4];
     let desc = data[5];
     let project = data[6];
+    let releaseChecked = data[7];
+    let tobeChecked = data[8];
+    let quarter = data[9];
+    let year = data[10];
     let coverkey = '2c80a7c879f421331226276dfbb9c6b878a99061';
     let projectKey = '6640a7fc89ec988a7214d13fb90641de03d69a1a';
     createCover(coverkey, coverTitle, project, coverChecked);
     createInfo(projectKey, UIdesigner, UXdesigner, desc);
+    createReleaseSection(releaseChecked, quarter, year);
+    createToBeSection(tobeChecked);
     creatArchive(archiveChecked);
 };
 ;
@@ -59,7 +65,28 @@ function createInfo(projectKey, UIdesigner, UXdesigner, desc) {
 }
 function creatArchive(archiveChecked) {
     if (archiveChecked === true) {
+        let dividerPage = figma.createPage();
+        dividerPage.name = '-----------------------------------';
         let archivePage = figma.createPage();
         archivePage.name = 'Archive';
+    }
+}
+function createToBeSection(tobeChecked) {
+    if (tobeChecked === true) {
+        let dividerPage = figma.createPage();
+        dividerPage.name = '-----------------------------------';
+        let toBe = figma.createPage();
+        toBe.name = 'TO-BE';
+    }
+}
+function createReleaseSection(releaseChecked, quarter, year) {
+    if (releaseChecked === true) {
+        let dividerPage = figma.createPage();
+        dividerPage.name = '-----------------------------------';
+        let release = figma.createPage();
+        release.name = 'Release';
+        let ChildPage = figma.createPage();
+        console.log(quarter, year);
+        ChildPage.name = ' ⌙ ' + year + "." + quarter;
     }
 }
